@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "Scrapes the jp-clothing page for new clothes.",
   "scripts": {
-    "cy:local": "cypress open --config chromeWebSecurity=false",
-    "e2e:local": "cypress run --headless --browser chrome --config chromeWebSecurity=false"
+    "cy": "cypress open --config chromeWebSecurity=false",
+    "scrape": "cypress run --headless --browser chrome --config chromeWebSecurity=false"
   },
   "keywords": [],
   "author": "Quirin Langer",

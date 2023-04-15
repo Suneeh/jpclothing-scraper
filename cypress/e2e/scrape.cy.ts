@@ -1,29 +1,47 @@
-import { listViewButton, productList, productName, productPrice, productUrl, UrlsToCheck } from '../fixtures/fixture';
+import { listViewButton, productList, productName, productPrice, productUrl, CategoriesToCheck } from '../fixtures/fixture';
 
 describe('JP Performance', () => {
-  UrlsToCheck.forEach((url) => {
-    const list = [];
-    it('has the same hoodies as last time', () => {
-      cy.visit(url);
+  const result: Result = {};
 
-      // Make articles be shown as list view
+  it('has the same hoodies as last time', () => {
+    CategoriesToCheck.forEach((category) => {
+      const products = [];
+      cy.visit(category.url);
+
       cy.get(listViewButton).click();
 
       cy.get(productList).each((article, index) => {
-        const title = article.find(productName).get(0).innerHTML;
-        const price = article.find(productPrice).get(0).innerHTML;
-        const url = article.find(productUrl).get(0).getAttribute('href');
-
-        //Cypress.env('USERNAME')
-
-        list.push({
+        products.push({
           index,
-          title,
-          price,
-          url: Cypress.config().baseUrl + url,
+          title: article.find(productName).get(0).innerHTML,
+          price: article.find(productPrice).get(0).innerHTML,
+          url: Cypress.config().baseUrl + article.find(productUrl).get(0).getAttribute('href'),
         });
       });
+
+      result[category.name] = products;
     });
-    console.log(list);
+
+    // Diff the old and new results
+    cy.readFile('results/result.json').then((oldResult: Result) => {
+      CategoriesToCheck.forEach((category) => {
+        if (oldResult[category.name].length == result[category.name].length) {
+          // find diff between oldResult and result and print it to some file ?
+        }
+      });
+      // write new file so the next run has some good data to check
+      //cy.writeFile('results/result.json', result);
+    });
   });
 });
+
+interface Result {
+  [key: string]: ArticleInfo[];
+}
+
+interface ArticleInfo {
+  index: number;
+  title: string;
+  price: string;
+  url: string;
+}
