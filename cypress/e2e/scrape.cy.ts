@@ -1,7 +1,7 @@
 import { listViewButton, productList, productName, productPrice, productUrl, UrlsToCheck } from '../fixtures/fixture';
 
 describe('JP Performance', () => {
-  UrlsToCheck.forEach((url, index) => {
+  UrlsToCheck.forEach((url) => {
     const list = [];
     it('has the same hoodies as last time', () => {
       cy.visit(url);
@@ -14,6 +14,8 @@ describe('JP Performance', () => {
         const price = article.find(productPrice).get(0).innerHTML;
         const url = article.find(productUrl).get(0).getAttribute('href');
 
+        //Cypress.env('USERNAME')
+
         list.push({
           index,
           title,
@@ -21,9 +23,6 @@ describe('JP Performance', () => {
           url: Cypress.config().baseUrl + url,
         });
       });
-      if (index === 2) {
-        cy.debug();
-      }
     });
     console.log(list);
   });
