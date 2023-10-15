@@ -35,6 +35,7 @@ describe('JP Performance', () => {
   });
 });
 
+// Move those to /fixtures/interfaces.ts
 interface Result {
   [key: string]: ArticleInfo[];
 }

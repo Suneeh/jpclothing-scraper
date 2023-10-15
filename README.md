@@ -1,4 +1,8 @@
-# JP-Clothing Web Scraper
+# JP-Clothing Web Scraper (DISCONTINUED)
+
+# Reason for discontinuation
+
+Since jp-clothing now offers a heads up mail that notifies you 12h in advance, this service is not competitive any longer.
 
 # About this Repositroy
 
@@ -18,7 +22,7 @@ and run the cypress scraper by calling:
 npm run scrape
 ```
 
-# In the future
+# In the future (not going to happen)
 
 In the future this will be built into a Dockerfile that will also notify me (by mail probably) whenever there is a difference in the scraping results from one run to another. It currently detects changes in the..
 
